@@ -1,0 +1,74 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>dsh-token-ring 交互预览</title>
+<style>
+:root{--bg:#0e1013;--p:#f2f4f8;--s:#9aa3b2;--t:#6b7280}
+@media (prefers-color-scheme:light){:root{--bg:#f7f8fa;--p:#171a20;--s:#4b5563;--t:#8b93a1}}
+*{box-sizing:border-box}
+body{margin:0;padding:34px 22px;background:var(--bg);color:var(--p);font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;display:flex;justify-content:center;-webkit-font-smoothing:antialiased}
+.wrap{width:100%;max-width:790px;display:flex;flex-direction:column;gap:18px}
+.dtr-head{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.dtr-head-main{flex:1;min-width:190px}
+.dtr-h1{margin:0;font-size:17px;font-weight:600;letter-spacing:.2px}
+.dtr-sub{margin:5px 0 0;font-size:12.5px;color:var(--t)}
+.dtr-range{display:inline-flex;padding:2.5px;gap:2px;border-radius:10px;background:rgba(127,127,127,.1);flex:none}
+.dtr-range span{font-size:12px;padding:6.5px 11px;border-radius:7.5px;color:var(--t)}
+.dtr-range span.on{background:linear-gradient(160deg,rgba(127,127,127,.28),rgba(127,127,127,.2));color:var(--p);font-weight:600}
+.dtr-rings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.dtr-card{display:flex;flex-direction:column;align-items:center;gap:12px;padding:17px 13px 15px;border-radius:16px;background:linear-gradient(163deg,rgba(127,127,127,.075),rgba(127,127,127,.028));border:1px solid rgba(127,127,127,.11);transition:border-color .2s,box-shadow .28s,transform .32s cubic-bezier(.34,1.56,.64,1)}
+.dtr-card:hover{border-color:rgba(127,127,127,.2);box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-2.5px)}
+.dtr-card-h{font-size:10.5px;letter-spacing:.7px;font-weight:600;color:var(--t);text-transform:uppercase}
+.dtr-ring{position:relative;display:flex;align-items:center;justify-content:center;flex:none}
+.dtr-svg{display:block;overflow:visible;animation:dtr-in .52s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes dtr-in{0%{transform:scale(.84) rotate(-7deg);opacity:0}60%{transform:scale(1.03) rotate(1deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+.dtr-seg{pointer-events:stroke;cursor:pointer;transition:stroke-width .34s cubic-bezier(.34,1.56,.64,1),opacity .2s ease,filter .22s ease}
+.dtr-seg[data-dim="1"]{opacity:.26}
+.dtr-seg[data-hot="1"]{filter:drop-shadow(0 0 7px currentColor)}
+.dtr-seg:active{stroke-width:17 !important}
+.dtr-mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;pointer-events:none;padding:0 8px}
+.dtr-mid-v{font-size:21px;font-weight:650;letter-spacing:-.5px;line-height:1.06;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.dtr-mid-u{font-size:9.5px;font-weight:600;color:var(--t);letter-spacing:1px;text-transform:uppercase;line-height:1.2;text-align:center}
+.dtr-mid-s{font-size:10.5px;color:var(--t);line-height:1.3;text-align:center;margin-top:1px}
+.dtr-pulse{animation:dtr-pop .36s cubic-bezier(.34,1.56,.64,1)}
+@keyframes dtr-pop{0%{transform:scale(.68);opacity:.2}55%{transform:scale(1.13)}78%{transform:scale(.96)}100%{transform:scale(1);opacity:1}}
+.dtr-legend{display:flex;flex-direction:column;gap:1px;width:100%}
+.dtr-li{display:flex;align-items:center;gap:8px;font-size:11.5px;padding:3.5px 6px;border-radius:7px;cursor:pointer;transition:background .15s,opacity .15s,transform .26s cubic-bezier(.34,1.56,.64,1);border:0;background:transparent;width:100%;text-align:left;font-family:inherit;color:inherit}
+.dtr-li:hover{background:rgba(127,127,127,.11)}
+.dtr-li[data-dim="1"]{opacity:.38}
+.dtr-li[data-hot="1"]{background:rgba(127,127,127,.13);transform:translateX(2px)}
+.dtr-dot{width:7px;height:7px;border-radius:2px;flex:none;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.dtr-li[data-hot="1"] .dtr-dot{transform:scale(1.55)}
+.dtr-li-k{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--s)}
+.dtr-li-v{font-variant-numeric:tabular-nums;color:var(--t);flex:none}
+.dtr-hint{margin:0;text-align:center;font-size:11px;color:var(--t);opacity:.75}
+@media (max-width:640px){.dtr-rings{grid-template-columns:1fr}.dtr-card{flex-direction:row;gap:15px;align-items:center;padding:15px}.dtr-card-h{writing-mode:vertical-rl}.dtr-legend{flex:1}}
+</style></head><body><div class="wrap">
+<div class="dtr-head"><div class="dtr-head-main"><h2 class="dtr-h1">用量</h2>
+<p class="dtr-sub">3 个会话 · 17 轮 · 定价取自 pricing.ccsa.json</p></div>
+<div class="dtr-range"><span>全部</span><span>90 天</span><span>30 天</span><span>7 天</span><span class="on">今天</span></div></div>
+<div class="dtr-rings"><div class="dtr-card"><div class="dtr-card-h">Token 构成</div><div class="dtr-ring" style="width:124px;height:124px"><svg class="dtr-svg" width="124" height="124" viewBox="0 0 124 124"><circle cx="62" cy="62" r="57" fill="none" stroke="rgba(127,127,127,.15)" stroke-width="10"/><circle class="dtr-seg" data-ring="token" data-i="0" data-hot="0" data-dim="0" cx="62" cy="62" r="57" fill="none" stroke="#38bdf8" stroke-width="10" stroke-dasharray="346.6978957841901 11.443666725046285" stroke-dashoffset="0" stroke-linecap="butt" transform="rotate(-90 62 62)" style="color:#38bdf8"/><circle class="dtr-seg" data-ring="token" data-i="1" data-hot="0" data-dim="0" cx="62" cy="62" r="57" fill="none" stroke="#6366f1" stroke-width="10" stroke-dasharray="9.658224197817054 348.48333831141935" stroke-dashoffset="-346.6978957841901" stroke-linecap="butt" transform="rotate(-90 62 62)" style="color:#6366f1"/><circle class="dtr-seg" data-ring="token" data-i="2" data-hot="0" data-dim="0" cx="62" cy="62" r="57" fill="none" stroke="#f472b6" stroke-width="10" stroke-dasharray="1.7854425272292458 356.35611998200716" stroke-dashoffset="-356.35611998200716" stroke-linecap="butt" transform="rotate(-90 62 62)" style="color:#f472b6"/></svg><div class="dtr-mid" id="mid-token"></div></div><div class="dtr-legend"><button type="button" class="dtr-li" data-ring="token" data-i="0" data-hot="0" data-dim="0"><span class="dtr-dot" style="background:#38bdf8"></span><span class="dtr-li-k" title="缓存读">缓存读</span><span class="dtr-li-v">96.8%</span></button><button type="button" class="dtr-li" data-ring="token" data-i="1" data-hot="0" data-dim="0"><span class="dtr-dot" style="background:#6366f1"></span><span class="dtr-li-k" title="未缓存输入">未缓存输入</span><span class="dtr-li-v">2.7%</span></button><button type="button" class="dtr-li" data-ring="token" data-i="2" data-hot="0" data-dim="0"><span class="dtr-dot" style="background:#f472b6"></span><span class="dtr-li-k" title="输出">输出</span><span class="dtr-li-v">0.5%</span></button></div></div><div class="dtr-card"><div class="dtr-card-h">花费 / 省下</div><div class="dtr-ring" style="width:124px;height:124px"><svg class="dtr-svg" width="124" height="124" viewBox="0 0 124 124"><circle cx="62" cy="62" r="57" fill="none" stroke="rgba(127,127,127,.15)" stroke-width="10"/><circle class="dtr-seg" data-ring="cost" data-i="0" data-hot="0" data-dim="0" cx="62" cy="62" r="57" fill="none" stroke="#22c55e" stroke-width="10" stroke-dasharray="23.384220280701218 334.75734222853515" stroke-dashoffset="0" stroke-linecap="butt" transform="rotate(-90 62 62)" style="color:#22c55e"/><circle class="dtr-seg" data-ring="cost" data-i="1" data-hot="0" data-dim="0" cx="62" cy="62" r="57" fill="none" stroke="rgba(127,127,127,.42)" stroke-width="10" stroke-dasharray="334.75734222853515 23.384220280701243" stroke-dashoffset="-23.384220280701218" stroke-linecap="butt" transform="rotate(-90 62 62)" style="color:rgba(127,127,127,.42)"/></svg><div class="dtr-mid" id="mid-cost"></div></div><div class="dtr-legend"><button type="button" class="dtr-li" data-ring="cost" data-i="0" data-hot="0" data-dim="0"><span class="dtr-dot" style="background:#22c55e"></span><span class="dtr-li-k" title="实际花费">实际花费</span><span class="dtr-li-v">¥6.70</span></button><button type="button" class="dtr-li" data-ring="cost" data-i="1" data-hot="0" data-dim="0"><span class="dtr-dot" style="background:rgba(127,127,127,.42)"></span><span class="dtr-li-k" title="缓存省下">缓存省下</span><span class="dtr-li-v">¥95.95</span></button></div></div><div class="dtr-card"><div class="dtr-card-h">模型占比</div><div class="dtr-ring" style="width:124px;height:124px"><svg class="dtr-svg" width="124" height="124" viewBox="0 0 124 124"><circle cx="62" cy="62" r="57" fill="none" stroke="rgba(127,127,127,.15)" stroke-width="10"/><circle class="dtr-seg" data-ring="model" data-i="0" data-hot="0" data-dim="0" cx="62" cy="62" r="57" fill="none" stroke="#38bdf8" stroke-width="10" stroke-dasharray="358.1415625092364 0" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 62 62)" style="color:#38bdf8"/></svg><div class="dtr-mid" id="mid-model"></div></div><div class="dtr-legend"><button type="button" class="dtr-li" data-ring="model" data-i="0" data-hot="0" data-dim="0"><span class="dtr-dot" style="background:#38bdf8"></span><span class="dtr-li-k" title="deepseek-v4.1-flash">deepseek-v4.1-flash</span><span class="dtr-li-v">100.0%</span></button></div></div></div>
+<p class="dtr-hint">悬停看细节 · 点击锁定 · 再点取消</p></div>
+<script>
+const RINGS={"token":{"segs":[{"key":"cacheRead","label":"缓存读","color":"#38bdf8","value":0.9680470855019762,"raw":97910016,"num":"97.9","unit":"M","sub":"96.8%"},{"key":"input","label":"未缓存输入","color":"#6366f1","value":0.02696761618547965,"raw":2727553,"num":"2.7","unit":"M","sub":"2.7%"},{"key":"output","label":"输出","color":"#f472b6","value":0.004985298312544218,"raw":504222,"num":"504.2","unit":"K","sub":"0.5%"}],"fallback":{"num":"101.1M","unit":"TOKENS","sub":""},"size":124,"thick":10},"cost":{"segs":[{"key":"cost","label":"实际花费","color":"#22c55e","value":0.06529323242146223,"raw":6.702641320000001,"num":"¥6.70","unit":"","sub":"6.5% · 人民币","money":true},{"key":"saved","label":"缓存省下","color":"rgba(127,127,127,.42)","value":0.9347067675785378,"raw":95.95181568,"num":"¥95.95","unit":"","sub":"93.5% · 若不走缓存","money":true}],"fallback":{"num":"¥6.70","unit":"RMB","sub":"命中率 97.3%"},"size":124,"thick":10},"model":{"segs":[{"key":"cn:deepseek-v4.1-flash","label":"deepseek-v4.1-flash","color":"#38bdf8","value":1,"raw":101141791,"num":"101.1","unit":"M","sub":"100.0% · ¥6.70"}],"fallback":{"num":"1","unit":"MODELS","sub":""},"size":124,"thick":10}};
+let hover=null,locked=null;
+const active=()=>locked||hover;
+function paint(){
+ const a=active(),isHot=(r,i)=>!!a&&a.ring===r&&a.i===i;
+ document.querySelectorAll('.dtr-seg').forEach(el=>{const r=el.dataset.ring,i=+el.dataset.i,hot=isHot(r,i);
+  el.dataset.hot=hot?'1':'0';el.dataset.dim=(a&&!hot)?'1':'0';
+  const base=RINGS[r].thick;el.setAttribute('stroke-width',hot?base*1.45:base);});
+ document.querySelectorAll('.dtr-li').forEach(el=>{const r=el.dataset.ring,i=+el.dataset.i,hot=isHot(r,i);
+  el.dataset.hot=hot?'1':'0';el.dataset.dim=(a&&!hot)?'1':'0';});
+ for(const name of ['token','cost','model']){
+  const cfg=RINGS[name],mid=document.getElementById('mid-'+name);
+  const on=a&&a.ring===name?cfg.segs[a.i]:null;
+  if(on){mid.innerHTML='<div class="dtr-mid-v dtr-pulse">'+on.num+(on.unit?'<span style="font-size:11px;font-weight:600;margin-left:2px">'+on.unit+'</span>':'')+'</div><div class="dtr-mid-u">'+on.label+'</div><div class="dtr-mid-s">'+on.sub+'</div>';}
+  else{const f=cfg.fallback;mid.innerHTML='<div class="dtr-mid-v">'+f.num+'</div><div class="dtr-mid-u">'+f.unit+'</div>'+(f.sub?'<div class="dtr-mid-s">'+f.sub+'</div>':'');}
+ }
+}
+document.querySelectorAll('.dtr-seg, .dtr-li').forEach(el=>{
+ const key=()=>({ring:el.dataset.ring,i:+el.dataset.i});
+ el.addEventListener('mouseenter',()=>{hover=key();paint();});
+ el.addEventListener('mouseleave',()=>{hover=null;paint();});
+ el.addEventListener('click',()=>{const k=key();locked=(locked&&locked.ring===k.ring&&locked.i===k.i)?null:k;paint();});
+});
+paint();
+</script></body></html>

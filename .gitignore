@@ -1,0 +1,12 @@
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+dist/
+
+# 编辑过程中的备份，不进仓库
+*.bak
+*.bak-*
+*.bak.*
